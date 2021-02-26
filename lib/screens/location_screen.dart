@@ -1,3 +1,4 @@
+import 'package:clima/screens/city_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/services/weather.dart';
@@ -25,6 +26,13 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void updateUI(dynamic weatherData) {
     setState(() {
+      if (weatherData = null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        message = 'Unable to get weather data';
+        cityName = '';
+        return;
+      }
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       message = weather.getMessage(temperature);
@@ -48,53 +56,66 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
         constraints: BoxConstraints.expand(),
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.near_me,
-                      size: 50.0,
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.location_city,
-                      size: 50.0,
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Row(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      '$temperature°',
-                      style: kTempTextStyle,
+                    FlatButton(
+                      onPressed: () async {
+                        var weatherData = await weather.getLocationWeather();
+                        updateUI(weatherData);
+                      },
+                      child: Icon(
+                        Icons.near_me,
+                        size: 50.0,
+                      ),
                     ),
-                    Text(
-                      weatherIcon,
-                      style: kConditionTextStyle,
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return CityScreen();
+                        }));
+                      },
+                      child: Icon(
+                        Icons.location_city,
+                        size: 50.0,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: Text(
-                  '$message in $cityName',
-                  textAlign: TextAlign.right,
-                  style: kMessageTextStyle,
+                SizedBox(
+                  height: 50.0,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        '$temperature°',
+                        style: kTempTextStyle,
+                      ),
+                      Text(
+                        weatherIcon,
+                        style: kConditionTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 15.0),
+                  child: Text(
+                    '$message in $cityName',
+                    textAlign: TextAlign.right,
+                    style: kMessageTextStyle,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
