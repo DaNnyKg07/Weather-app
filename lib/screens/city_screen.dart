@@ -21,6 +21,7 @@ class _CityScreenState extends State<CityScreen> {
         constraints: BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Align(
                 alignment: Alignment.topLeft,
@@ -29,8 +30,8 @@ class _CityScreenState extends State<CityScreen> {
                     Navigator.pop(context);
                   },
                   child: Icon(
-                    Icons.arrow_back_ios,
-                    size: 50.0,
+                    Icons.arrow_back_sharp,
+                    size: 40.0,
                   ),
                 ),
               ),
@@ -51,7 +52,7 @@ class _CityScreenState extends State<CityScreen> {
                   Navigator.pop(context, cityName);
                 },
                 child: Text(
-                  'Get Weather',
+                  'Fetch Weather',
                   style: kButtonTextStyle,
                 ),
               ),

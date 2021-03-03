@@ -23,7 +23,8 @@ const kTextFieldDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white,
   icon: Icon(
-    Icons.location_city,
+    Icons.location_city_rounded,
+    size: 35,
     color: Colors.white,
   ),
   hintText: 'City Name',

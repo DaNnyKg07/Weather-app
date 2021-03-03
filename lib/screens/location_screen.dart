@@ -70,7 +70,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         updateUI(weatherData);
                       },
                       child: Icon(
-                        Icons.near_me,
+                        Icons.refresh_rounded,
                         size: 50.0,
                       ),
                     ),
@@ -87,14 +87,14 @@ class _LocationScreenState extends State<LocationScreen> {
                         }
                       },
                       child: Icon(
-                        Icons.location_city,
+                        Icons.location_city_rounded,
                         size: 50.0,
                       ),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: 40.0,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 15.0),
