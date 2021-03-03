@@ -66,6 +66,31 @@ class _LocationScreenState extends State<LocationScreen> {
                   children: <Widget>[
                     FlatButton(
                       onPressed: () async {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            backgroundColor: Colors.white,
+                            title: Text(
+                              "Fetched weather Data",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            content: Text(
+                              "Data might be same as you are not moving",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text(
+                                  'OK',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
+                          ),
+                        );
                         var weatherData = await weather.getLocationWeather();
                         updateUI(weatherData);
                       },
