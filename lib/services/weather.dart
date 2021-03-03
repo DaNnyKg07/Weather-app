@@ -1,10 +1,19 @@
 import 'package:clima/services/location.dart';
 import 'package:clima/services/networking.dart';
+import 'package:flutter/material.dart';
 
 const apiKey = '65cc5254ceacdd3a6c37060ee8535928';
 const openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherModel {
+  BuildContext context;
+  Future<dynamic> getCityWeather(String cityName) async {
+    var url = '$openWeatherMapUrl?q=$cityName&appid=$apiKey&units=metric';
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   Future<dynamic> getLocationWeather() async {
     Location location = Location();
     await location.getCurrentLocation();
@@ -42,7 +51,7 @@ class WeatherModel {
     } else if (temp > 20) {
       return 'Time for shorts and 👕';
     } else if (temp < 10) {
-      return 'You\'ll need 🧣 and 🧤';
+      return 'You\'ll need scarf and 🧤';
     } else {
       return 'Bring a 🧥 just in case';
     }

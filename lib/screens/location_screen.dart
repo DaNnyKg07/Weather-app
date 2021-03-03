@@ -26,7 +26,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void updateUI(dynamic weatherData) {
     setState(() {
-      if (weatherData = null) {
+      if (weatherData == null) {
         temperature = 0;
         weatherIcon = 'Error';
         message = 'Unable to get weather data';
@@ -48,7 +48,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/location_background.jpg'),
+            image: AssetImage('images/clear.jpg'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.8), BlendMode.dstATop),
@@ -75,11 +75,16 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ),
                     FlatButton(
-                      onPressed: () {
-                        Navigator.push(context,
+                      onPressed: () async {
+                        var typedName = await Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return CityScreen();
                         }));
+                        if (typedName != null) {
+                          var weatherData =
+                              await weather.getCityWeather(typedName);
+                          updateUI(weatherData);
+                        }
                       },
                       child: Icon(
                         Icons.location_city,
