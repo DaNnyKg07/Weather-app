@@ -71,11 +71,11 @@ class _LocationScreenState extends State<LocationScreen> {
                           builder: (_) => AlertDialog(
                             backgroundColor: Colors.white,
                             title: Text(
-                              "Fetched weather Data",
+                              "Fetched new Data",
                               style: TextStyle(color: Colors.black),
                             ),
                             content: Text(
-                              "Data might be same as you are not moving",
+                              "Data might be same as you in same city",
                               style: TextStyle(color: Colors.black),
                             ),
                             actions: <Widget>[
