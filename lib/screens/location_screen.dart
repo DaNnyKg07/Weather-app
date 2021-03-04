@@ -75,7 +75,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               style: TextStyle(color: Colors.black),
                             ),
                             content: Text(
-                              "Data might be same as you in same city",
+                              "Data might be same as you are in same city",
                               style: TextStyle(color: Colors.black),
                             ),
                             actions: <Widget>[
